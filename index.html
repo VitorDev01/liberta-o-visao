@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Galeria Embaralhada</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    background:#111;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:25px;
+    font-family:Arial, sans-serif;
+}
+
+.galeria{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:15px;
+}
+
+.galeria img{
+    width:180px;
+    height:180px;
+    object-fit:cover;
+    border-radius:12px;
+    border:2px solid #fff;
+
+    animation:pulse 1.5s ease-in-out infinite;
+    transition:opacity .3s ease;
+}
+
+@keyframes pulse{
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.02);
+    }
+}
+
+button{
+    padding:14px 30px;
+    font-size:18px;
+    font-weight:bold;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+@media(max-width:500px){
+
+    .galeria img{
+        width:150px;
+        height:150px;
+    }
+
+    button{
+        width:90%;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="galeria">
+    <img id="foto1">
+    <img id="foto2">
+    <img id="foto3">
+    <img id="foto4">
+</div>
+
+<button id="embaralhar">
+Ver Espiritual 
+</button>
+
+<script>
+const fotos = [];
+
+// Carrega 1.jpg até 14.jpg
+for(let i = 1; i <= 14; i++){
+    fotos.push(`imagens/${i}.jpg`);
+}
+
+const quadros = [
+    document.getElementById("foto1"),
+    document.getElementById("foto2"),
+    document.getElementById("foto3"),
+    document.getElementById("foto4")
+];
+
+function embaralharFotos(){
+
+    quadros.forEach(quadro => {
+
+        const indice = Math.floor(
+            Math.random() * fotos.length
+        );
+
+        quadro.style.opacity = "0";
+
+        setTimeout(() => {
+            quadro.src = fotos[indice];
+            quadro.style.opacity = "1";
+        }, 150);
+
+    });
+}
+
+document
+.getElementById("embaralhar")
+.addEventListener("click", embaralharFotos);
+
+// Sorteio inicial
+embaralharFotos();
+</script>
+
+</body>
+</html>
