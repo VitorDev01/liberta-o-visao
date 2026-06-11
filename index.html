@@ -24,9 +24,31 @@ body{
     font-family:Arial, sans-serif;
 }
 
-.galeria img{
-    width:180px;
-    height:180px;
+.galeria{
+    display:grid;
+
+    grid-template-columns:auto auto;
+
+    grid-template-areas:
+        "c1 c2"
+        "c5 c5"
+        "c3 c4";
+
+    justify-content:center;
+    align-items:center;
+
+    column-gap:60px;
+    row-gap:25px;
+}
+
+.c1{grid-area:c1;}
+.c2{grid-area:c2;}
+.c3{grid-area:c3;}
+.c4{grid-area:c4;}
+
+.c5{
+    grid-area:c5;
+    justify-self:center;
 }
 
 .galeria img{
@@ -35,18 +57,15 @@ body{
     object-fit:cover;
 
     border-radius:12px;
-    border:2px solid #fff;
+    
+    box-shadow:
+        0 4px 10px rgba(0,0,0,.5),
+        0 0 15px rgba(255,255,255,.15);
 
     animation:pulse 1.5s ease-in-out infinite;
     transition:opacity .2s ease;
 }
 
-    .galeria img{
-    box-shadow:
-        0 4px 10px rgba(0,0,0,.5),
-        0 0 15px rgba(255,255,255,.15);
-}
-    
 @keyframes pulse{
     0%,100%{
         transform:scale(1);
@@ -74,12 +93,13 @@ button:hover{
 @media(max-width:500px){
 
     .galeria{
-        gap:10px;
+        column-gap:20px;
+        row-gap:15px;
     }
 
     .galeria img{
-        width:120px;
-        height:175px;
+        width:110px;
+        height:160px;
     }
 
     button{
@@ -91,29 +111,33 @@ button:hover{
 <body>
 
 <div class="galeria">
-    <img id="foto1">
-    <img id="foto2">
-    <img id="foto3">
-    <img id="foto4">
+    <img id="foto1" class="c1">
+    <img id="foto2" class="c2">
+
+    <img id="foto5" class="c5">
+
+    <img id="foto3" class="c3">
+    <img id="foto4" class="c4">
 </div>
 
 <button id="embaralhar">
-Ver Espiritual 
+Ver Espiritual
 </button>
 
 <script>
 const fotos = [];
 
-// Carrega 1.jpg até 14.jpg
+// 1.jpg até 14.jpg
 for(let i = 1; i <= 14; i++){
-     fotos.push(`${i}.jpg`);
+    fotos.push(`${i}.jpg`);
 }
 
 const quadros = [
     document.getElementById("foto1"),
     document.getElementById("foto2"),
     document.getElementById("foto3"),
-    document.getElementById("foto4")
+    document.getElementById("foto4"),
+    document.getElementById("foto5")
 ];
 
 function embaralharFotos(){
@@ -138,7 +162,6 @@ document
 .getElementById("embaralhar")
 .addEventListener("click", embaralharFotos);
 
-// Sorteio inicial
 embaralharFotos();
 </script>
 
