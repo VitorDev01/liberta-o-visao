@@ -85,17 +85,38 @@ body{
 }
 
 button{
-    padding:14px 30px;
-    font-size:18px;
-    font-weight:bold;
-    border:none;
-    border-radius:10px;
+    padding:10px 22px;
+    font-size:15px;
+    font-weight:600;
+
+    color:#fff;
+
+    background:linear-gradient(
+        135deg,
+        #4a2a7a,
+        #6a3db8
+    );
+
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:30px;
+
     cursor:pointer;
-    transition:.3s;
+
+    box-shadow:
+        0 0 10px rgba(106,61,184,.4);
+
+    transition:all .25s ease;
 }
 
 button:hover{
-    transform:scale(1.05);
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 0 18px rgba(106,61,184,.7);
+}
+
+button:active{
+    transform:scale(.96);
 }
 
 @media(max-width:500px){
