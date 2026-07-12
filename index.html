@@ -3,160 +3,161 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Galeria Embaralhada</title>
-
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+:root {
+    --bg1: #020b0a;
+    --bg2: #001a12;
+    --card: rgba(0, 255, 80, 0.07);
+    --stroke: rgba(0, 255, 100, 0.20);
+    --text: #e0ffe6;
+    --accent: #00ff88;
+    --accent2: #00ff44;
 }
 
-body{
-    min-height:100vh;
-    align-items:center;
-    gap:25px;
-    font-family:Arial, sans-serif;
-    background:
-    linear-gradient(
-        to bottom,
-        #1b2735 0%,
-        #2a3f5f 35%,
-        #3b1d59 65%,
-        #12071f 100%
-    );
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.galeria{
-    display:grid;
+body {
+    min-height: 100vh;
+    background: radial-gradient(circle at top, #003322, var(--bg1));
+    color: var(--text);
+    font-family: 'Share Tech Mono', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 20px;
+}
 
-    grid-template-columns:auto auto;
+.container {
+    width: 100%;
+    max-width: 520px;
+    padding: 25px;
+    border-radius: 20px;
+    background: var(--card);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--stroke);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8),
+                0 0 40px rgba(0, 255, 100, 0.12);
+}
 
+h1 {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 25px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px var(--accent);
+}
+
+.galeria {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     grid-template-areas:
         "c1 c2"
         "c5 c5"
         "c3 c4";
-
-    justify-content:center;
-    align-items:center;
-
-    column-gap:60px;
-    row-gap:25px;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 
-.c1{grid-area:c1;}
-.c2{grid-area:c2;}
-.c3{grid-area:c3;}
-.c4{grid-area:c4;}
-
-.c5{
-    grid-area:c5;
-    justify-self:center;
+.galeria img {
+    width: 100%;
+    max-width: 160px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 1px solid var(--stroke);
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.6),
+        0 0 20px rgba(0, 255, 100, 0.25);
+    transition: all 0.4s ease;
 }
 
-.galeria img{
-    width:140px;
-    height:205px;
-    object-fit:cover;
-
-    border-radius:12px;
-    
-    box-shadow:
-        0 4px 10px rgba(0,0,0,.5),
-        0 0 15px rgba(255,255,255,.15);
-
-    animation:pulse 1.5s ease-in-out infinite;
-    transition:opacity .2s ease;
+.galeria img:hover {
+    transform: scale(1.05) rotate(2deg);
+    box-shadow: 0 0 30px rgba(0, 255, 100, 0.5);
 }
 
-@keyframes pulse{
-    0%,100%{
-        transform:scale(1);
+.c1 { grid-area: c1; justify-self: end; }
+.c2 { grid-area: c2; justify-self: start; }
+.c3 { grid-area: c3; justify-self: end; }
+.c4 { grid-area: c4; justify-self: start; }
+.c5 { 
+    grid-area: c5; 
+    justify-self: center;
+    max-width: 170px;
+    height: 240px;
+}
+
+/* Botão */
+button {
+    width: 100%;
+    max-width: 320px;
+    padding: 16px 30px;
+    font-size: 18px;
+    font-weight: 700;
+    color: black;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(0, 255, 100, 0.5);
+    transition: all 0.3s ease;
+    margin: 0 auto;
+    display: block;
+}
+
+button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 30px rgba(0, 255, 100, 0.7);
+}
+
+button:active {
+    transform: scale(0.96);
+}
+
+/* Responsivo */
+@media (max-width: 500px) {
+    .galeria img {
+        max-width: 130px;
+        height: 180px;
     }
-
-    50%{
-        transform:scale(1.02);
+    .c5 {
+        max-width: 140px;
+        height: 200px;
     }
-}
-
-button{
-    padding:10px 22px;
-    font-size:15px;
-    font-weight:600;
-
-    color:#fff;
-
-    background:linear-gradient(
-        135deg,
-        #4a2a7a,
-        #6a3db8
-    );
-
-    border:1px solid rgba(255,255,255,.2);
-    border-radius:30px;
-
-    cursor:pointer;
-
-    box-shadow:
-        0 0 10px rgba(106,61,184,.4);
-
-    transition:all .25s ease;
-}
-
-button:hover{
-    transform:translateY(-2px);
-
-    box-shadow:
-        0 0 18px rgba(106,61,184,.7);
-}
-
-button:active{
-    transform:scale(.96);
-}
-
-@media(max-width:500px){
-
-    .galeria{
-        column-gap:20px;
-        row-gap:15px;
-    }
-
-    .galeria img{
-        width:110px;
-        height:160px;
-    }
-
-    button{
-        width:90%;
+    .galeria {
+        gap: 15px;
     }
 }
 </style>
 </head>
 <body>
 
-<div class="galeria">
-    <img id="foto1" class="c1">
-    <img id="foto2" class="c2">
+<div class="container">
+    <h1>🌌 Ver No Espiritual</h1>
+    
+    <div class="galeria">
+        <img id="foto1" class="c1">
+        <img id="foto2" class="c2">
+        <img id="foto5" class="c5">
+        <img id="foto3" class="c3">
+        <img id="foto4" class="c4">
+    </div>
 
-    <img id="foto5" class="c5">
-
-    <img id="foto3" class="c3">
-    <img id="foto4" class="c4">
+    <button id="embaralhar">🔀 Libertação</button>
 </div>
-
-<button id="embaralhar">
-Ver Espiritual
-</button>
 
 <script>
 const fotos = [];
-
-// 1.jpg até 24.jpg
 for(let i = 1; i <= 24; i++){
     fotos.push(`img/${i}.jpg`);
 }
@@ -170,29 +171,18 @@ const quadros = [
 ];
 
 function embaralharFotos(){
-
     quadros.forEach(quadro => {
-
-        const indice = Math.floor(
-            Math.random() * fotos.length
-        );
-
+        const indice = Math.floor(Math.random() * fotos.length);
         quadro.style.opacity = "0";
-
         setTimeout(() => {
             quadro.src = fotos[indice];
             quadro.style.opacity = "1";
-        }, 150);
-
+        }, 180);
     });
 }
 
-document
-.getElementById("embaralhar")
-.addEventListener("click", embaralharFotos);
-
-embaralharFotos();
+document.getElementById("embaralhar").addEventListener("click", embaralharFotos);
+embaralharFotos(); // Carrega na abertura
 </script>
-
 </body>
 </html>
